@@ -1,3 +1,6 @@
+// ════════════════════════════════════════════
+// STATE
+// ════════════════════════════════════════════
 let S = { days: [], sessions: [] };
 let selDayId = null;
 let curLog = null; // treino em andamento
@@ -61,12 +64,19 @@ function go(name, btn, isMobile) {
   if (name === "charts") initCharts();
 }
 
+// ════════════════════════════════════════════
+// TOAST
+// ════════════════════════════════════════════
 function toast(msg) {
   const t = document.getElementById("toast");
   t.textContent = msg;
   t.classList.add("show");
   setTimeout(() => t.classList.remove("show"), 2000);
 }
+
+// ════════════════════════════════════════════
+// PLANNER
+// ════════════════════════════════════════════
 function addDay() {
   const inp = document.getElementById("new-day-input");
   const name = inp.value.trim().toUpperCase();
@@ -346,7 +356,7 @@ function renderLog() {
           <div class="log-card-title">${ex.name}</div>
           <div class="log-card-meta">${ex.plannedSets}× · ${ex.plannedReps} reps</div>
         </div>
-        <div id="lcp-${ei}" style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:22px;color:var(--muted)">
+        <div id="lcp-${ei}" style="font-family:'IBM Plex Mono',sans-serif;font-weight:800;font-size:22px;color:var(--muted)">
           ${ex.sets.filter((s) => s.weight !== "" && s.reps !== "").length}/${ex.sets.length}
         </div>
       </div>
@@ -650,29 +660,29 @@ function renderCharts() {
     plugins: {
       legend: { display: false },
       tooltip: {
-        backgroundColor: "#242018",
-        borderColor: "rgba(255,255,255,0.07)",
+        backgroundColor: "#1c2330",
+        borderColor: "rgba(255,255,255,0.08)",
         borderWidth: 1,
-        titleColor: "#f26419",
-        bodyColor: "#f0e6d3",
+        titleColor: "#4f8ef7",
+        bodyColor: "#e2e8f0",
         padding: 10,
         cornerRadius: 8,
-        titleFont: { family: "Barlow Condensed", size: 15, weight: "700" },
-        bodyFont: { family: "DM Mono", size: 12 },
+        titleFont: { family: "IBM Plex Mono", size: 15, weight: "700" },
+        bodyFont: { family: "JetBrains Mono", size: 12 },
       },
     },
     scales: {
       x: {
         ticks: {
           color: "rgba(240,230,211,0.3)",
-          font: { family: "DM Mono", size: 10 },
+          font: { family: "JetBrains Mono", size: 10 },
         },
         grid: { color: "rgba(255,255,255,0.04)" },
       },
       y: {
         ticks: {
           color: "rgba(240,230,211,0.3)",
-          font: { family: "DM Mono", size: 10 },
+          font: { family: "JetBrains Mono", size: 10 },
         },
         grid: { color: "rgba(255,255,255,0.04)" },
       },
@@ -685,9 +695,9 @@ function renderCharts() {
       datasets: [
         {
           data,
-          borderColor: "#f26419",
-          backgroundColor: "rgba(242,100,25,0.1)",
-          pointBackgroundColor: "#f26419",
+          borderColor: "#4f8ef7",
+          backgroundColor: "rgba(79,142,247,0.1)",
+          pointBackgroundColor: "#4f8ef7",
           pointRadius: 5,
           pointHoverRadius: 8,
           tension: 0.35,
@@ -939,7 +949,7 @@ function renderMuscleChips() {
       border:1.5px solid ${m === libMuscleFilter ? "var(--orange)" : "var(--border)"};
       background:${m === libMuscleFilter ? "var(--orange-dim)" : "transparent"};
       color:${m === libMuscleFilter ? "var(--orange)" : "var(--muted)"};
-      font-family:'Barlow Condensed',sans-serif; font-weight:700;
+      font-family:'IBM Plex Mono',sans-serif; font-weight:700;
       font-size:14px; letter-spacing:1px; cursor:pointer;
       transition:all 0.15s; white-space:nowrap;
     ">${m}</div>
@@ -987,10 +997,10 @@ function filterLibrary() {
           return `
         <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;margin-bottom:8px;overflow:hidden">
           <div style="display:flex;align-items:center;justify-content:space-between;padding:13px 14px 10px">
-            <span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:17px;flex:1">${e.name}</span>
+            <span style="font-family:'IBM Plex Mono',sans-serif;font-weight:700;font-size:17px;flex:1">${e.name}</span>
             <button onclick="pickLibExercise('${e.name.replace(/'/g, "\\'")}','${e.muscle}')"
               style="background:var(--orange);border:none;color:#fff;border-radius:100px;padding:8px 18px;
-                font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:14px;letter-spacing:1px;cursor:pointer;
+                font-family:'IBM Plex Mono',sans-serif;font-weight:700;font-size:14px;letter-spacing:1px;cursor:pointer;
                 box-shadow:0 2px 12px var(--orange-glow);flex-shrink:0">
               ADD ＋
             </button>
@@ -1000,7 +1010,7 @@ function filterLibrary() {
               <span style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--muted)">Séries</span>
               <div style="display:flex;align-items:center;background:var(--bg2);border:1.5px solid var(--border);border-radius:8px;overflow:hidden">
                 <button onclick="libSpin('${key}','sets',-1)" style="background:none;border:none;color:var(--cream-dim);width:30px;height:30px;font-size:16px;cursor:pointer">−</button>
-                <span id="lps-${key.replace(/ /g, "_")}" style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:16px;color:var(--cream);min-width:22px;text-align:center">${p.sets}</span>
+                <span id="lps-${key.replace(/ /g, "_")}" style="font-family:'IBM Plex Mono',sans-serif;font-weight:700;font-size:16px;color:var(--cream);min-width:22px;text-align:center">${p.sets}</span>
                 <button onclick="libSpin('${key}','sets',1)" style="background:none;border:none;color:var(--cream-dim);width:30px;height:30px;font-size:16px;cursor:pointer">＋</button>
               </div>
             </div>
@@ -1008,7 +1018,7 @@ function filterLibrary() {
               <span style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--muted)">Reps</span>
               <div style="display:flex;align-items:center;background:var(--bg2);border:1.5px solid var(--border);border-radius:8px;overflow:hidden">
                 <button onclick="libSpin('${key}','reps',-1)" style="background:none;border:none;color:var(--cream-dim);width:30px;height:30px;font-size:16px;cursor:pointer">−</button>
-                <span id="lpr-${key.replace(/ /g, "_")}" style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:16px;color:var(--cream);min-width:22px;text-align:center">${p.reps}</span>
+                <span id="lpr-${key.replace(/ /g, "_")}" style="font-family:'IBM Plex Mono',sans-serif;font-weight:700;font-size:16px;color:var(--cream);min-width:22px;text-align:center">${p.reps}</span>
                 <button onclick="libSpin('${key}','reps',1)" style="background:none;border:none;color:var(--cream-dim);width:30px;height:30px;font-size:16px;cursor:pointer">＋</button>
               </div>
             </div>
